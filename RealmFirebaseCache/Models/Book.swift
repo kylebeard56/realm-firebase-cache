@@ -18,9 +18,9 @@ struct Book: FirebaseIdentifiable {
 
     init(
         id: String = UUID().uuidString,
-        libraryID: String = “”,
-        name: String = “”,
-        author: String = “”,
+        libraryID: String = "",
+        name: String = "",
+        author: String = "",
         pages: Int = 0,
         isCheckedOut: Bool = false,
         lastUpdatedAt: Double = Date().timeIntervalSince1970

@@ -6,7 +6,7 @@
 //
 
 import Firebase
-import FirebaseFirestoreSwift
+import FirebaseFirestoreCombineSwift
 import Foundation
 import SwiftUI
 
@@ -29,7 +29,7 @@ extension FirebaseIdentifiable {
     }
 
     /// DELETE from Firebase
-    func delete(from collection: String) async -> Result<Void, Error> {
+    func delete(from collection: String) async -> Result<Bool, Error> {
         var data = self
         data.lastUpdatedAt = Date().timeIntervalSince1970
         return await FirebaseService.shared.delete(data, in: collection)

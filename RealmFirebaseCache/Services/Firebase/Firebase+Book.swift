@@ -6,7 +6,7 @@
 //
 
 import Firebase
-import FirebaseFirestoreSwift
+import FirebaseFirestoreCombineSwift
 import Foundation
 
 extension FirebaseService {
@@ -40,7 +40,7 @@ extension FirebaseService {
         } catch let error {
             if let e = error as? FirebaseError, e == .documentNotFound, useCache {
                 /// Attempt to get from cache since API didn't return results.
-                if let data = await RealmService.shared.read(of: Post(), with: id) {
+                if let data = await RealmService.shared.read(of: Book(), with: id) {
                     print("Book [\(id)] fetched from local cache")
                     return .success(data)
                 } else {
@@ -64,11 +64,11 @@ extension FirebaseService {
         do {
             /// Build query for firebase accordingly
             let query = database
-                .collection(Collections.posts.rawValue)
+                .collection(Collections.books.rawValue)
                 .whereField(useCondition: useCache, "lastUpdatedAt", isGreaterThan: lastQueriedTimestamp)
             
             /// Fetch from API with the appropriate filters
-            let data = try await getMany(of: Post(), with: query).get()
+            let data = try await getMany(of: Book(), with: query).get()
             
             /// Fetch cached posts prior to API call
             let cache = await RealmService.shared.read(of: Book(), in: Collections.books.rawValue)

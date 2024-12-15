@@ -6,7 +6,7 @@
 //
 
 import Firebase
-import FirebaseFirestoreSwift
+import FirebaseFirestoreCombineSwift
 import Foundation
 
 extension Query {
